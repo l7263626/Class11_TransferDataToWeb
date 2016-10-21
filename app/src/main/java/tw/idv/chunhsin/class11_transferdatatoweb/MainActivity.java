@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -76,6 +77,17 @@ public class MainActivity extends AppCompatActivity {
             conn.setDoInput(true);
             conn.setDoOutput(true);
             conn.connect();
+
+            //送資料給網站
+            /*
+            OutputStream os=conn.getOutputStream();
+            String urlData="Id="+etId.getText().toString()+
+                    "&name="+etName.getText().toString()+
+                    "&phone="+etPhone.getText().toString();
+            os.write(urlData.getBytes());
+            os.flush();
+            os.close();
+            */
 
             //謮取網站的回應 response
             BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
