@@ -91,35 +91,34 @@ public class MainActivity extends AppCompatActivity {
 
             ArrayList<HashMap<String,String>> arrayList=new ArrayList<>();
 
-            try {
-                JSONObject jo=new JSONObject(sb.toString());
-                JSONArray ja=jo.getJSONArray("data");
-                for(int i=0;i<ja.length();i++){
-                    HashMap<String,String> items=new HashMap<>();
-                    JSONArray jarows=ja.getJSONArray(i);
-                    items.put("Id",jarows.getString(0));
-                    items.put("Name",jarows.getString(1));
-                    items.put("Phone",jarows.getString(2));
-                    items.put("IP",jarows.getString(3));
+            JSONObject jo=new JSONObject(sb.toString());
+            JSONArray ja=jo.getJSONArray("data");
+            for(int i=0;i<ja.length();i++){
+                HashMap<String,String> items=new HashMap<>();
+                JSONArray jarows=ja.getJSONArray(i);
+                items.put("Id",jarows.getString(0));
+                items.put("Name",jarows.getString(1));
+                items.put("Phone",jarows.getString(2));
+                items.put("IP",jarows.getString(3));
 
-                    arrayList.add(items);
-                }
-                simpleAdapter=new SimpleAdapter(
-                        this,
-                        arrayList,
-                        R.layout.list_items,
-                        new String[]{"Id","Name","Phone","IP"},
-                        new int[]{R.id.textView4,R.id.textView5,R.id.textView6,R.id.textView7}
-                );
-                handler.sendEmptyMessage(0);
-                //listView.setAdapter(simpleAdapter);
-            } catch (JSONException e) {
-                e.printStackTrace();
+                arrayList.add(items);
             }
+            simpleAdapter=new SimpleAdapter(
+                    this,
+                    arrayList,
+                    R.layout.list_items,
+                    new String[]{"Id","Name","Phone","IP"},
+                    new int[]{R.id.textView4,R.id.textView5,R.id.textView6,R.id.textView7}
+            );
+            handler.sendEmptyMessage(0);
+            //listView.setAdapter(simpleAdapter);
+
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
